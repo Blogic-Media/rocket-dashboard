@@ -332,13 +332,6 @@
         <button class="action-button" onclick="openHourly('yesterday', '- sgv')">Uren gisteren</button>
         <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1bGmd7204kBpp2iykwrZips_vQWluXp0F8SobE0UQHcE/edit?gid=1426903825#gid=1426903825', '_blank')">Worksheet</button>
       </div></div>
-      <div class="card"><div class="label">Sander</div><div class="buttons">
-        <button class="action-button" onclick="openReport('- sst', 'today')">Vandaag</button>
-        <button class="action-button" onclick="openReport('- sst', 'yesterday')">Gisteren</button>
-        <button class="action-button" onclick="openHourly('today', '- sst')">Uren vandaag</button>
-        <button class="action-button" onclick="openHourly('yesterday', '- sst')">Uren gisteren</button>
-        <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1yYa5y1px5pOFcyTtwQeyIwczKd_b5hSFy6EWggt6FyM/edit?gid=1426903825#gid=1426903825', '_blank')">Worksheet</button>
-      </div></div>
       <div class="card"><div class="label">Owen</div><div class="buttons">
         <button class="action-button" onclick="openReport('- sow', 'today')">Vandaag</button>
         <button class="action-button" onclick="openReport('- sow', 'yesterday')">Gisteren</button>
@@ -353,26 +346,17 @@
         <button class="action-button" onclick="openHourly('yesterday', '- sks')">Uren gisteren</button>
         <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1IcbiHJ6r7zi5zJgaanNR-1dm44hjpo4jhIf1KhVJ4yg/edit?gid=1426903825#gid=1426903825', '_blank')">Worksheet</button>
       </div></div>
-      <div class="card"><div class="label">Wouter</div><div class="buttons">
-        <button class="action-button" onclick="openReport('- swb', 'today')">Vandaag</button>
-        <button class="action-button" onclick="openReport('- swb', 'yesterday')">Gisteren</button>
-        <button class="action-button" onclick="openHourly('today', '- swb')">Uren vandaag</button>
-        <button class="action-button" onclick="openHourly('yesterday', '- swb')">Uren gisteren</button>
-        <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/14fbPQgc2CSWO7lOZ8rIibimqCK4bJ-G5uZZcPkgE_c0/edit?gid=1426903825', '_blank')">Worksheet</button>
-      </div></div>
     </div>
   </div>
 
   <script>
     function formatDate(date) { return date.toISOString().slice(0, 10); }
 
-    // Filter helper voor alle rapporten behalve uren
     function getFeedFilter() {
       const feed = document.getElementById('feedSelector').value;
       return (feed === 'ALL') ? '' : `&filter=feedName:eq:${encodeURIComponent(feed)}`;
     }
 
-    // Dimension helper
     function getDimensions(baseDims) {
       const feed = document.getElementById('feedSelector').value;
       return (feed === 'ALL') ? baseDims : `${baseDims},feedName`;
@@ -414,15 +398,11 @@
       window.open(url, '_blank');
     }
 
-    // DEZE FUNCTIE NEGEERT NU DE FEED SELECTOR
     function openHourly(range, campagne = '') {
       const nu = new Date();
       let ds = (range === 'today') ? formatDate(nu) : formatDate(new Date(nu.getTime() - 86400000));
-      // Gebruik hardcoded hour dimension zonder feedName
       let url = `https://rocket.maximizer.io/stats?dateStart=${ds}&dateEnd=${ds}&dimensions=hour&metrics=cpa,rpc,spend,revenue,profit,roi`;
       if (campagne) url += `&filter=campaignName:cn:${campagne}`;
-      
-      // Geen feed filter toegevoegd hier
       window.open(url + `&filter=spend:gt:1&sort=hour&style=flat`, '_blank');
     }
 
