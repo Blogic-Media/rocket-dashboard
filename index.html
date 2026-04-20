@@ -213,8 +213,8 @@
       <button class="action-button" onclick="openHourly('today')">Uren vandaag</button>
       <button class="action-button" onclick="openHourly('yesterday')">Uren gisteren</button>
       <button class="action-button" onclick="openD2D()">D2D</button>
+      <button class="action-button" onclick="openUSRPCTrend()">US RPC Trend</button>
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1pcaDGNZmGRt5cV8aUGC1eMUPLo8A_aXBlMvVHfvXuSg/edit?gid=1072646418#gid=1072646418', '_blank')">Parentsheet</button>
-      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/14J5aJfmYfS1kykiIfzA0hTG3UHz80r2MyHcicfTacws/edit?gid=118875398#gid=118875398', '_blank')">Informationsheet</button>
     </div>
   </div>
 
@@ -367,6 +367,14 @@
       const firstDay = formatDate(new Date(nu.getFullYear(), nu.getMonth(), 1));
       const today = formatDate(nu);
       const url = `https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpa,rpc,spend,revenue,profit,roi&filter=spend:gt:1&sort=-date&style=flat${getFeedFilter()}`;
+      window.open(url, '_blank');
+    }
+
+    function openUSRPCTrend() {
+      const nu = new Date();
+      const firstDay = formatDate(new Date(nu.getFullYear(), nu.getMonth(), 1));
+      const today = formatDate(nu);
+      const url = `https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpc,cpa,rpm,rpc,spend,revenue,profit,roi&filter=spend:gt:1&filter=countryCode:eq:US&sort=-date&style=flat${getFeedFilter()}`;
       window.open(url, '_blank');
     }
 
