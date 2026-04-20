@@ -350,7 +350,14 @@
   </div>
 
   <script>
-    function formatDate(date) { return date.toISOString().slice(0, 10); }
+    // Gebruik lokale tijdnotatie om UTC-verschuiving te voorkomen
+    function getLocalISO(date) {
+      const offset = date.getTimezoneOffset();
+      const localDate = new Date(date.getTime() - (offset * 60 * 1000));
+      return localDate.toISOString().split('T')[0];
+    }
+
+    function formatDate(date) { return getLocalISO(date); }
 
     function getFeedFilter() {
       const feed = document.getElementById('feedSelector').value;
@@ -364,16 +371,17 @@
 
     function openD2D() {
       const nu = new Date();
-      const firstDay = formatDate(new Date(nu.getFullYear(), nu.getMonth(), 1));
-      const today = formatDate(nu);
+      const firstDay = getLocalISO(new Date(nu.getFullYear(), nu.getMonth(), 1));
+      const today = getLocalISO(nu);
       const url = `https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpa,rpc,spend,revenue,profit,roi&filter=spend:gt:1&sort=-date&style=flat${getFeedFilter()}`;
       window.open(url, '_blank');
     }
 
     function openUSRPCTrend() {
       const nu = new Date();
-      const firstDay = formatDate(new Date(nu.getFullYear(), nu.getMonth(), 1));
-      const today = formatDate(nu);
+      // Forceer de 1e van de maand in lokale tijd
+      const firstDay = getLocalISO(new Date(nu.getFullYear(), nu.getMonth(), 1));
+      const today = getLocalISO(nu);
       const url = `https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpc,cpa,rpm,rpc,spend,revenue,profit,roi&filter=spend:gt:1&filter=countryCode:eq:US&sort=-date&style=flat${getFeedFilter()}`;
       window.open(url, '_blank');
     }
@@ -392,8 +400,8 @@
     function openReport(campagne, range, isId = false) {
       const nu = new Date();
       let dStart, dEnd;
-      if (range === 'today') { dStart = dEnd = formatDate(nu); } 
-      else { dStart = dEnd = formatDate(new Date(nu.getTime() - 86400000)); }
+      if (range === 'today') { dStart = dEnd = getLocalISO(nu); } 
+      else { dStart = dEnd = getLocalISO(new Date(nu.getTime() - 86400000)); }
 
       let dims = getDimensions("campaignName,query,campaignID,campaignStatus,adsetDailyBudget");
       let url = `https://rocket.maximizer.io/stats?dateStart=${dStart}&dateEnd=${dEnd}&dimensions=${dims}&metrics=cpa,rpc,spend,revenue,profit,roi`;
@@ -408,7 +416,7 @@
 
     function openHourly(range, campagne = '') {
       const nu = new Date();
-      let ds = (range === 'today') ? formatDate(nu) : formatDate(new Date(nu.getTime() - 86400000));
+      let ds = (range === 'today') ? getLocalISO(nu) : getLocalISO(new Date(nu.getTime() - 86400000));
       let url = `https://rocket.maximizer.io/stats?dateStart=${ds}&dateEnd=${ds}&dimensions=hour&metrics=cpa,rpc,spend,revenue,profit,roi`;
       if (campagne) url += `&filter=campaignName:cn:${campagne}`;
       window.open(url + `&filter=spend:gt:1&sort=hour&style=flat`, '_blank');
