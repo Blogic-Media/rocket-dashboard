@@ -128,7 +128,6 @@
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
 
-    /* Dropdown Styles */
     .dropdown { position: relative; display: inline-block; }
     .dropdown-content {
       display: none;
@@ -207,7 +206,7 @@
 
   <div class="card hero">
     <div class="label" style="text-align:center;">🔎 Alle campagnes</div>
-    <div class="buttons" style="justify-content:center;">
+    <div class="buttons" style="justify-content:center; margin-bottom: 12px;">
       <button class="action-button" onclick="openReport('', 'today')">Vandaag</button>
       <button class="action-button" onclick="openReport('', 'yesterday')">Gisteren</button>
       <button class="action-button" onclick="openHourly('today')">Uren vandaag</button>
@@ -215,6 +214,12 @@
       <button class="action-button" onclick="openD2D()">D2D</button>
       <button class="action-button" onclick="openUSRPCTrend()">US RPC Trend</button>
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1pcaDGNZmGRt5cV8aUGC1eMUPLo8A_aXBlMvVHfvXuSg/edit?gid=1072646418#gid=1072646418', '_blank')">Parentsheet</button>
+    </div>
+    <div class="buttons" style="justify-content:center; border-top: 1px solid rgba(128,128,128,0.2); padding-top: 15px;">
+      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1fN2vjFrXMOjIIItjagjc6pYCLUaD7bzTI_y9b49kzuI/edit?gid=777660633#gid=777660633', '_blank')">Predicto</button>
+      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1JcGHqL7MasJlzvUxD_IRZGA7pC-JFZaV37Pv3mixzPs/edit?gid=239224389#gid=239224389', '_blank')">Visymo</button>
+      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/12WXUZsQOrD51OPP0wiJ0zYmiwTzIUFwy5o4-ur_9X4A/edit?gid=1584433282#gid=1584433282', '_blank')">Kueez</button>
+      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1eno-mZWwlJYbJ-AeZ88e6iINCifltPK28BwrjPn0ARQ/edit?gid=249876749#gid=249876749', '_blank')">Bigpipes</button>
     </div>
   </div>
 
@@ -350,7 +355,6 @@
   </div>
 
   <script>
-    // Gebruik lokale tijdnotatie om UTC-verschuiving te voorkomen
     function getLocalISO(date) {
       const offset = date.getTimezoneOffset();
       const localDate = new Date(date.getTime() - (offset * 60 * 1000));
@@ -379,7 +383,6 @@
 
     function openUSRPCTrend() {
       const nu = new Date();
-      // Forceer de 1e van de maand in lokale tijd
       const firstDay = getLocalISO(new Date(nu.getFullYear(), nu.getMonth(), 1));
       const today = getLocalISO(nu);
       const url = `https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpc,cpa,rpm,rpc,spend,revenue,profit,roi&filter=spend:gt:1&filter=countryCode:eq:US&sort=-date&style=flat${getFeedFilter()}`;
