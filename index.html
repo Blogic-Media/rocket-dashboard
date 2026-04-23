@@ -29,24 +29,16 @@
     .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
     h1 { font-size: 28px; margin: 0; }
     .toggle-container button { 
-      background: none; 
-      border: 1px solid var(--text-color); 
-      padding: 6px 12px; 
-      color: var(--text-color); 
-      cursor: pointer; 
-      border-radius: 5px; 
-      font-size: 14px; 
+      background: none; border: 1px solid var(--text-color); padding: 6px 12px; 
+      color: var(--text-color); cursor: pointer; border-radius: 5px; font-size: 14px; 
     }
     .card { 
-      background: var(--card-color); 
-      border-radius: 8px; 
-      padding: 20px; 
-      margin-bottom: 20px; 
-      box-shadow: 0 2px 5px rgba(0,0,0,0.08); 
+      background: var(--card-color); border-radius: 8px; padding: 20px; 
+      margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.08); 
     }
     .card .label { font-size: 16px; font-weight: bold; margin-bottom: 12px; }
 
-    /* Knop instellingen - Terug naar origineel voor normale cards */
+    /* Standaard button stijl */
     .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
     button.action-button { 
       padding: 8px 14px; 
@@ -61,7 +53,9 @@
       height: 35px;
       display: flex;
       align-items: center;
+      justify-content: center;
       box-sizing: border-box;
+      width: auto; /* Buttons passen zich aan tekst aan */
     }
     button.action-button:hover { 
       transform: translateY(-1px); 
@@ -69,17 +63,12 @@
       background: var(--button-hover); 
     }
 
-    /* Specifieke grid voor de HERO card (Bovenste grote kaart) */
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
+    /* Hero specifieke centrering */
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
-    }
-    .hero-grid button.action-button {
-      width: 100%;
-      justify-content: center;
-      padding: 8px 5px;
-      font-size: 13px;
+      justify-content: center; /* Alles in het midden */
     }
 
     .refresh-btn { 
@@ -97,18 +86,12 @@
     .inline-row { display: flex; align-items: center; gap: 12px; }
     .fixed-label { min-width: 130px; font-weight: 500; white-space: nowrap; }
     .search-input { flex-grow: 1; max-width: 350px; }
-    .search-button { min-width: 140px; text-align: center; justify-content: center; }
     
     input[type="date"], input[type="text"], select { 
       font-family: inherit; font-size: 14px; color: var(--text-color); background: var(--card-color); 
       padding: 6px 10px; border: 1px solid #ccc; border-radius: 5px; outline: none; height: 35px; box-sizing: border-box;
     }
 
-    @media (max-width: 1100px) { 
-      .top-controls { flex-direction: column; align-items: stretch; } 
-      .calendar-section { border-right: none; border-bottom: 1px solid #ccc; padding-bottom: 20px; } 
-      .hero-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
-    }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
 
@@ -159,18 +142,18 @@
             <option value="Maximizer Stellar (explorerdigest.com)">Maximizer Stellar (explorerdigest.com)</option>
           </select>
         </div>
-        <button class="action-button" onclick="handleOpenCustomAll()" style="justify-content: center; width: 100%;">Open (alle campagnes)</button>
+        <button class="action-button" onclick="handleOpenCustomAll()" style="width: 100%;">Open (alle campagnes)</button>
       </div>
       <div class="search-stack">
         <div class="inline-row">
           <span class="fixed-label">Campaign Name:</span>
           <input id="campaignQuery" class="search-input" type="text" placeholder="Voer campaign name in" />
-          <button class="action-button" onclick="handleSearchCampaign()" style="min-width: 140px; justify-content: center;">Zoek op naam</button>
+          <button class="action-button" onclick="handleSearchCampaign()" style="min-width: 140px;">Zoek op naam</button>
         </div>
         <div class="inline-row">
           <span class="fixed-label">Campaign ID:</span>
           <input id="campaignIdQuery" class="search-input" type="text" placeholder="Voer campaign id in" />
-          <button class="action-button" onclick="handleSearchById()" style="min-width: 140px; justify-content: center;">Zoek op ID</button>
+          <button class="action-button" onclick="handleSearchById()" style="min-width: 140px;">Zoek op ID</button>
         </div>
       </div>
     </div>
@@ -179,7 +162,7 @@
   <div class="card hero">
     <div class="label" style="text-align:center;">🔎 Alle campagnes</div>
     
-    <div class="hero-grid" style="margin-bottom: 12px;">
+    <div class="hero-buttons" style="margin-bottom: 12px;">
       <button class="action-button" onclick="openReport('', 'today')">Vandaag</button>
       <button class="action-button" onclick="openReport('', 'yesterday')">Gisteren</button>
       <button class="action-button" onclick="openHourly('today')">Uren vandaag</button>
@@ -189,12 +172,11 @@
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1pcaDGNZmGRt5cV8aUGC1eMUPLo8A_aXBlMvVHfvXuSg/edit?gid=1072646418#gid=1072646418', '_blank')">Parentsheet</button>
     </div>
 
-    <div class="hero-grid" style="border-top: 1px solid rgba(128,128,128,0.2); padding-top: 15px;">
+    <div class="hero-buttons" style="border-top: 1px solid rgba(128,128,128,0.2); padding-top: 15px;">
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1fN2vjFrXMOjIIItjagjc6pYCLUaD7bzTI_y9b49kzuI/edit?gid=777660633#gid=777660633', '_blank')">Predicto worksheet</button>
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1JcGHqL7MasJlzvUxD_IRZGA7pC-JFZaV37Pv3mixzPs/edit?gid=239224389#gid=239224389', '_blank')">Visymo worksheet</button>
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/12WXUZsQOrD51OPP0wiJ0zYmiwTzIUFwy5o4-ur_9X4A/edit?gid=1584433282#gid=1584433282', '_blank')">Kueez worksheet</button>
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1eno-mZWwlJYbJ-AeZ88e6iINCifltPK28BwrjPn0ARQ/edit?gid=249876749#gid=249876749', '_blank')">Bigpipes worksheet</button>
-      <span></span><span></span><span></span>
     </div>
   </div>
 
