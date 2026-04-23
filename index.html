@@ -45,10 +45,20 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.08); 
     }
     .card .label { font-size: 16px; font-weight: bold; margin-bottom: 12px; }
+    
+    /* Grid layout voor de hero buttons */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+      justify-items: center;
+    }
+
     .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+    
     button.action-button { 
       padding: 8px 14px; 
-      font-size: 14px; 
+      font-size: 13px; 
       cursor: pointer; 
       border: none; 
       background: var(--button-color); 
@@ -59,7 +69,9 @@
       height: 35px;
       display: flex;
       align-items: center;
+      justify-content: center;
       box-sizing: border-box;
+      width: 100%;
     }
     button.action-button:hover { 
       transform: translateY(-1px); 
@@ -124,11 +136,12 @@
     @media (max-width: 1100px) { 
       .top-controls { flex-direction: column; align-items: stretch; } 
       .calendar-section { border-right: none; border-bottom: 1px solid #ccc; padding-bottom: 20px; } 
+      .hero-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
     }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
 
-    .dropdown { position: relative; display: inline-block; }
+    .dropdown { position: relative; display: inline-block; width: 100%; }
     .dropdown-content {
       display: none;
       position: absolute;
@@ -206,7 +219,8 @@
 
   <div class="card hero">
     <div class="label" style="text-align:center;">🔎 Alle campagnes</div>
-    <div class="buttons" style="justify-content:center; margin-bottom: 12px;">
+    
+    <div class="hero-grid" style="margin-bottom: 12px;">
       <button class="action-button" onclick="openReport('', 'today')">Vandaag</button>
       <button class="action-button" onclick="openReport('', 'yesterday')">Gisteren</button>
       <button class="action-button" onclick="openHourly('today')">Uren vandaag</button>
@@ -215,11 +229,14 @@
       <button class="action-button" onclick="openUSRPCTrend()">US RPC Trend</button>
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1pcaDGNZmGRt5cV8aUGC1eMUPLo8A_aXBlMvVHfvXuSg/edit?gid=1072646418#gid=1072646418', '_blank')">Parentsheet</button>
     </div>
-    <div class="buttons" style="justify-content:center; border-top: 1px solid rgba(128,128,128,0.2); padding-top: 15px;">
-      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1fN2vjFrXMOjIIItjagjc6pYCLUaD7bzTI_y9b49kzuI/edit?gid=777660633#gid=777660633', '_blank')">Predicto</button>
-      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1JcGHqL7MasJlzvUxD_IRZGA7pC-JFZaV37Pv3mixzPs/edit?gid=239224389#gid=239224389', '_blank')">Visymo</button>
-      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/12WXUZsQOrD51OPP0wiJ0zYmiwTzIUFwy5o4-ur_9X4A/edit?gid=1584433282#gid=1584433282', '_blank')">Kueez</button>
-      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1eno-mZWwlJYbJ-AeZ88e6iINCifltPK28BwrjPn0ARQ/edit?gid=249876749#gid=249876749', '_blank')">Bigpipes</button>
+
+    <div class="hero-grid" style="border-top: 1px solid rgba(128,128,128,0.2); padding-top: 15px;">
+      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1fN2vjFrXMOjIIItjagjc6pYCLUaD7bzTI_y9b49kzuI/edit?gid=777660633#gid=777660633', '_blank')">Predicto worksheet</button>
+      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1JcGHqL7MasJlzvUxD_IRZGA7pC-JFZaV37Pv3mixzPs/edit?gid=239224389#gid=239224389', '_blank')">Visymo worksheet</button>
+      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/12WXUZsQOrD51OPP0wiJ0zYmiwTzIUFwy5o4-ur_9X4A/edit?gid=1584433282#gid=1584433282', '_blank')">Kueez worksheet</button>
+      <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1eno-mZWwlJYbJ-AeZ88e6iINCifltPK28BwrjPn0ARQ/edit?gid=249876749#gid=249876749', '_blank')">Bigpipes worksheet</button>
+      <span></span><span></span>
+      <span></span>
     </div>
   </div>
 
@@ -285,13 +302,6 @@
         <button class="action-button" onclick="openHourly('yesterday', '- sjr')">Uren gisteren</button>
         <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1LCZ05qG9A-YjgrUVMbm3sBkEToWB5fubA2o2LvuqLmg/edit?gid=1426903825#gid=1426903825', '_blank')">Worksheet</button>
       </div></div>
-      <div class="card"><div class="label">Bram</div><div class="buttons">
-        <button class="action-button" onclick="openReport('- sbl', 'today')">Vandaag</button>
-        <button class="action-button" onclick="openReport('- sbl', 'yesterday')">Gisteren</button>
-        <button class="action-button" onclick="openHourly('today', '- sbl')">Uren vandaag</button>
-        <button class="action-button" onclick="openHourly('yesterday', '- sbl')">Uren gisteren</button>
-        <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1Uu5XuNv0umFlDQmBOMBqBZVMgbevNQrL92ScAbcPvnU/edit?gid=1426903825#gid=1426903825', '_blank')">Worksheet</button>
-      </div></div>
     </div>
 
     <div class="col">
@@ -344,13 +354,6 @@
         <button class="action-button" onclick="openHourly('yesterday', '- sks')">Uren gisteren</button>
         <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1IcbiHJ6r7zi5zJgaanNR-1dm44hjpo4jhIf1KhVJ4yg/edit?gid=1426903825#gid=1426903825', '_blank')">Worksheet</button>
       </div></div>
-      <div class="card"><div class="label">Stijn</div><div class="buttons">
-        <button class="action-button" onclick="openReport('- sss', 'today')">Vandaag</button>
-        <button class="action-button" onclick="openReport('- sss', 'yesterday')">Gisteren</button>
-        <button class="action-button" onclick="openHourly('today', '- sss')">Uren vandaag</button>
-        <button class="action-button" onclick="openHourly('yesterday', '- sss')">Uren gisteren</button>
-        <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/17JGJvjH1EPjlmwMaHJ8nN5Dv-e13a7CwEu9sHe7Y6Mc/edit?gid=1042481573#gid=1042481573', '_blank')">Worksheet</button>
-      </div></div>
     </div>
   </div>
 
@@ -359,34 +362,6 @@
       const offset = date.getTimezoneOffset();
       const localDate = new Date(date.getTime() - (offset * 60 * 1000));
       return localDate.toISOString().split('T')[0];
-    }
-
-    function formatDate(date) { return getLocalISO(date); }
-
-    function getFeedFilter() {
-      const feed = document.getElementById('feedSelector').value;
-      return (feed === 'ALL') ? '' : `&filter=feedName:eq:${encodeURIComponent(feed)}`;
-    }
-
-    function getDimensions(baseDims) {
-      const feed = document.getElementById('feedSelector').value;
-      return (feed === 'ALL') ? baseDims : `${baseDims},feedName`;
-    }
-
-    function openD2D() {
-      const nu = new Date();
-      const firstDay = getLocalISO(new Date(nu.getFullYear(), nu.getMonth(), 1));
-      const today = getLocalISO(nu);
-      const url = `https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpa,rpc,spend,revenue,profit,roi&filter=spend:gt:1&sort=-date&style=flat${getFeedFilter()}`;
-      window.open(url, '_blank');
-    }
-
-    function openUSRPCTrend() {
-      const nu = new Date();
-      const firstDay = getLocalISO(new Date(nu.getFullYear(), nu.getMonth(), 1));
-      const today = getLocalISO(nu);
-      const url = `https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpc,cpa,rpm,rpc,spend,revenue,profit,roi&filter=spend:gt:1&filter=countryCode:eq:US&sort=-date&style=flat${getFeedFilter()}`;
-      window.open(url, '_blank');
     }
 
     function resetFilters() {
@@ -405,15 +380,13 @@
       let dStart, dEnd;
       if (range === 'today') { dStart = dEnd = getLocalISO(nu); } 
       else { dStart = dEnd = getLocalISO(new Date(nu.getTime() - 86400000)); }
-
-      let dims = getDimensions("campaignName,query,campaignID,campaignStatus,adsetDailyBudget");
+      const feed = document.getElementById('feedSelector').value;
+      const feedFilt = (feed === 'ALL') ? '' : `&filter=feedName:eq:${encodeURIComponent(feed)}`;
+      const dims = (feed === 'ALL') ? "campaignName,query,campaignID,campaignStatus,adsetDailyBudget" : "campaignName,query,campaignID,campaignStatus,adsetDailyBudget,feedName";
+      
       let url = `https://rocket.maximizer.io/stats?dateStart=${dStart}&dateEnd=${dEnd}&dimensions=${dims}&metrics=cpa,rpc,spend,revenue,profit,roi`;
-      
-      if (campagne) {
-        url += isId ? `&filter=campaignID:eq:${campagne}` : `&filter=campaignName:cn:${campagne}`;
-      }
-      
-      url += `${getFeedFilter()}&filter=spend:gt:1&sort=-profit&style=flat`;
+      if (campagne) url += isId ? `&filter=campaignID:eq:${campagne}` : `&filter=campaignName:cn:${campagne}`;
+      url += `${feedFilt}&filter=spend:gt:1&sort=-profit&style=flat`;
       window.open(url, '_blank');
     }
 
@@ -425,40 +398,35 @@
       window.open(url + `&filter=spend:gt:1&sort=hour&style=flat`, '_blank');
     }
 
-    function openReportWithDates(campagne, ds, de, isId = false) {
-      if (!ds || !de) { alert('Kies datums.'); return; }
-      let dims = "campaignName,campaignID,campaignStatus,sourceProvider,adsetDailyBudget";
-      if (ds !== de) dims = "date," + dims;
-      dims = getDimensions(dims);
-
-      let url = `https://rocket.maximizer.io/stats?dateStart=${ds}&dateEnd=${de}&dimensions=${dims}&metrics=cpa,rpc,spend,revenue,profit,roi`;
-      if (campagne) url += isId ? `&filter=campaignID:eq:${campagne}` : `&filter=campaignName:cn:${campagne}`;
-      
-      let sortField = (ds !== de) ? "-date" : "-profit";
-      url += `${getFeedFilter()}&filter=spend:gt:1&sort=${sortField}&style=flat`;
-      window.open(url, '_blank');
+    function openD2D() {
+      const nu = new Date();
+      const firstDay = getLocalISO(new Date(nu.getFullYear(), nu.getMonth(), 1));
+      const today = getLocalISO(nu);
+      window.open(`https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpa,rpc,spend,revenue,profit,roi&filter=spend:gt:1&sort=-date&style=flat`, '_blank');
     }
 
-    function handleOpenCustomAll() { openReportWithDates('', document.getElementById('fromDate').value, document.getElementById('toDate').value); }
-    
+    function openUSRPCTrend() {
+      const nu = new Date();
+      const firstDay = getLocalISO(new Date(nu.getFullYear(), nu.getMonth(), 1));
+      const today = getLocalISO(nu);
+      window.open(`https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpc,cpa,rpm,rpc,spend,revenue,profit,roi&filter=spend:gt:1&filter=countryCode:eq:US&sort=-date&style=flat`, '_blank');
+    }
+
+    function handleOpenCustomAll() {
+      const f = document.getElementById('fromDate').value;
+      const t = document.getElementById('toDate').value;
+      if (!f || !t) return alert('Kies datums.');
+      window.open(`https://rocket.maximizer.io/stats?dateStart=${f}&dateEnd=${t}&dimensions=campaignName,campaignID,campaignStatus&metrics=cpa,rpc,spend,revenue,profit,roi&filter=spend:gt:1&sort=-profit&style=flat`, '_blank');
+    }
+
     function handleSearchCampaign() {
-      const input = document.getElementById('campaignQuery');
-      let q = input.value.trim();
-      let f = document.getElementById('fromDate').value, t = document.getElementById('toDate').value;
-      if (q) { 
-        if (f && t) openReportWithDates(q, f, t); else openReport(q, 'yesterday'); 
-        input.value = '';
-      }
+      const q = document.getElementById('campaignQuery').value.trim();
+      if (q) openReport(q, 'yesterday');
     }
-    
+
     function handleSearchById() {
-      const input = document.getElementById('campaignIdQuery');
-      let q = input.value.trim();
-      let f = document.getElementById('fromDate').value, t = document.getElementById('toDate').value;
-      if (q) { 
-        if (f && t) openReportWithDates(q, f, t, true); else openReport(q, 'yesterday', true); 
-        input.value = '';
-      }
+      const q = document.getElementById('campaignIdQuery').value.trim();
+      if (q) openReport(q, 'yesterday', true);
     }
 
     function toggleDarkMode() {
@@ -471,9 +439,6 @@
         document.body.classList.add('dark'); 
         document.getElementById('themeToggleBtn').textContent = '☀️ Lichte modus'; 
     }
-
-    document.getElementById('campaignQuery').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSearchCampaign(); });
-    document.getElementById('campaignIdQuery').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSearchById(); });
   </script>
 </div>
 </body>
