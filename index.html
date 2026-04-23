@@ -45,20 +45,12 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.08); 
     }
     .card .label { font-size: 16px; font-weight: bold; margin-bottom: 12px; }
-    
-    /* Grid layout voor de hero buttons */
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 10px;
-      justify-items: center;
-    }
 
+    /* Knop instellingen - Terug naar origineel voor normale cards */
     .buttons { display: flex; flex-wrap: wrap; gap: 10px; }
-    
     button.action-button { 
       padding: 8px 14px; 
-      font-size: 13px; 
+      font-size: 14px; 
       cursor: pointer; 
       border: none; 
       background: var(--button-color); 
@@ -69,51 +61,38 @@
       height: 35px;
       display: flex;
       align-items: center;
-      justify-content: center;
       box-sizing: border-box;
-      width: 100%;
     }
     button.action-button:hover { 
       transform: translateY(-1px); 
       box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
       background: var(--button-hover); 
     }
-    
-    .refresh-btn { 
-      background: none; 
-      border: none; 
-      cursor: pointer; 
-      font-size: 22px; 
-      color: var(--text-color); 
-      padding: 0 5px; 
-      display: inline-flex; 
-      align-items: center; 
+
+    /* Specifieke grid voor de HERO card (Bovenste grote kaart) */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+    .hero-grid button.action-button {
+      width: 100%;
       justify-content: center;
-      height: 35px; 
-      line-height: 1;
-      box-sizing: border-box;
-      vertical-align: middle;
-      transition: transform 0.2s;
+      padding: 8px 5px;
+      font-size: 13px;
+    }
+
+    .refresh-btn { 
+      background: none; border: none; cursor: pointer; font-size: 22px; color: var(--text-color); 
+      padding: 0 5px; display: inline-flex; align-items: center; justify-content: center;
+      height: 35px; vertical-align: middle; transition: transform 0.2s;
     }
     .refresh-btn:active { transform: scale(0.9); }
-    
-    .spin-animation {
-      animation: spin 0.6s ease-in-out;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+    .spin-animation { animation: spin 0.6s ease-in-out; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     
     .top-controls { display: flex; align-items: center; gap: 30px; }
-    .calendar-section { 
-      padding-right: 30px; 
-      border-right: 1px solid #ccc; 
-      display: flex; 
-      flex-direction: column; 
-      gap: 12px; 
-      flex-shrink: 0; 
-    }
+    .calendar-section { padding-right: 30px; border-right: 1px solid #ccc; display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
     .search-stack { display: flex; flex-direction: column; gap: 10px; flex-grow: 1; }
     .inline-row { display: flex; align-items: center; gap: 12px; }
     .fixed-label { min-width: 130px; font-weight: 500; white-space: nowrap; }
@@ -121,45 +100,25 @@
     .search-button { min-width: 140px; text-align: center; justify-content: center; }
     
     input[type="date"], input[type="text"], select { 
-      font-family: inherit; 
-      font-size: 14px; 
-      color: var(--text-color); 
-      background: var(--card-color); 
-      padding: 6px 10px; 
-      border: 1px solid #ccc; 
-      border-radius: 5px; 
-      outline: none;
-      height: 35px; 
-      box-sizing: border-box;
+      font-family: inherit; font-size: 14px; color: var(--text-color); background: var(--card-color); 
+      padding: 6px 10px; border: 1px solid #ccc; border-radius: 5px; outline: none; height: 35px; box-sizing: border-box;
     }
 
     @media (max-width: 1100px) { 
       .top-controls { flex-direction: column; align-items: stretch; } 
       .calendar-section { border-right: none; border-bottom: 1px solid #ccc; padding-bottom: 20px; } 
-      .hero-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+      .hero-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
     }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
 
-    .dropdown { position: relative; display: inline-block; width: 100%; }
+    .dropdown { position: relative; display: inline-block; }
     .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: var(--card-color);
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-      z-index: 10;
-      border-radius: 5px;
-      bottom: 100%;
-      margin-bottom: 5px;
+      display: none; position: absolute; background-color: var(--card-color); min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 10; border-radius: 5px; bottom: 100%; margin-bottom: 5px;
     }
     .dropdown-content a {
-      color: var(--text-color);
-      padding: 10px 12px;
-      text-decoration: none;
-      display: block;
-      font-size: 13px;
-      border-bottom: 1px solid #ccc;
+      color: var(--text-color); padding: 10px 12px; text-decoration: none; display: block; font-size: 13px; border-bottom: 1px solid #ccc;
     }
     .dropdown-content a:last-child { border-bottom: none; }
     .dropdown-content a:hover { background-color: var(--button-color); color: white; }
@@ -200,18 +159,18 @@
             <option value="Maximizer Stellar (explorerdigest.com)">Maximizer Stellar (explorerdigest.com)</option>
           </select>
         </div>
-        <button class="action-button" onclick="handleOpenCustomAll()" style="justify-content: center;">Open (alle campagnes)</button>
+        <button class="action-button" onclick="handleOpenCustomAll()" style="justify-content: center; width: 100%;">Open (alle campagnes)</button>
       </div>
       <div class="search-stack">
         <div class="inline-row">
           <span class="fixed-label">Campaign Name:</span>
           <input id="campaignQuery" class="search-input" type="text" placeholder="Voer campaign name in" />
-          <button class="action-button search-button" onclick="handleSearchCampaign()">Zoek op naam</button>
+          <button class="action-button" onclick="handleSearchCampaign()" style="min-width: 140px; justify-content: center;">Zoek op naam</button>
         </div>
         <div class="inline-row">
           <span class="fixed-label">Campaign ID:</span>
           <input id="campaignIdQuery" class="search-input" type="text" placeholder="Voer campaign id in" />
-          <button class="action-button search-button" onclick="handleSearchById()">Zoek op ID</button>
+          <button class="action-button" onclick="handleSearchById()" style="min-width: 140px; justify-content: center;">Zoek op ID</button>
         </div>
       </div>
     </div>
@@ -235,8 +194,7 @@
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1JcGHqL7MasJlzvUxD_IRZGA7pC-JFZaV37Pv3mixzPs/edit?gid=239224389#gid=239224389', '_blank')">Visymo worksheet</button>
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/12WXUZsQOrD51OPP0wiJ0zYmiwTzIUFwy5o4-ur_9X4A/edit?gid=1584433282#gid=1584433282', '_blank')">Kueez worksheet</button>
       <button class="action-button" onclick="window.open('https://docs.google.com/spreadsheets/d/1eno-mZWwlJYbJ-AeZ88e6iINCifltPK28BwrjPn0ARQ/edit?gid=249876749#gid=249876749', '_blank')">Bigpipes worksheet</button>
-      <span></span><span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
   </div>
 
@@ -363,7 +321,6 @@
       const localDate = new Date(date.getTime() - (offset * 60 * 1000));
       return localDate.toISOString().split('T')[0];
     }
-
     function resetFilters() {
       const btn = document.getElementById('refreshBtn');
       btn.classList.add('spin-animation');
@@ -374,7 +331,6 @@
       document.getElementById('feedSelector').value = 'ALL';
       setTimeout(() => { btn.classList.remove('spin-animation'); }, 600);
     }
-
     function openReport(campagne, range, isId = false) {
       const nu = new Date();
       let dStart, dEnd;
@@ -383,13 +339,11 @@
       const feed = document.getElementById('feedSelector').value;
       const feedFilt = (feed === 'ALL') ? '' : `&filter=feedName:eq:${encodeURIComponent(feed)}`;
       const dims = (feed === 'ALL') ? "campaignName,query,campaignID,campaignStatus,adsetDailyBudget" : "campaignName,query,campaignID,campaignStatus,adsetDailyBudget,feedName";
-      
       let url = `https://rocket.maximizer.io/stats?dateStart=${dStart}&dateEnd=${dEnd}&dimensions=${dims}&metrics=cpa,rpc,spend,revenue,profit,roi`;
       if (campagne) url += isId ? `&filter=campaignID:eq:${campagne}` : `&filter=campaignName:cn:${campagne}`;
       url += `${feedFilt}&filter=spend:gt:1&sort=-profit&style=flat`;
       window.open(url, '_blank');
     }
-
     function openHourly(range, campagne = '') {
       const nu = new Date();
       let ds = (range === 'today') ? getLocalISO(nu) : getLocalISO(new Date(nu.getTime() - 86400000));
@@ -397,44 +351,37 @@
       if (campagne) url += `&filter=campaignName:cn:${campagne}`;
       window.open(url + `&filter=spend:gt:1&sort=hour&style=flat`, '_blank');
     }
-
     function openD2D() {
       const nu = new Date();
       const firstDay = getLocalISO(new Date(nu.getFullYear(), nu.getMonth(), 1));
       const today = getLocalISO(nu);
       window.open(`https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpa,rpc,spend,revenue,profit,roi&filter=spend:gt:1&sort=-date&style=flat`, '_blank');
     }
-
     function openUSRPCTrend() {
       const nu = new Date();
       const firstDay = getLocalISO(new Date(nu.getFullYear(), nu.getMonth(), 1));
       const today = getLocalISO(nu);
       window.open(`https://rocket.maximizer.io/stats?dateStart=${firstDay}&dateEnd=${today}&dimensions=date&metrics=cpc,cpa,rpm,rpc,spend,revenue,profit,roi&filter=spend:gt:1&filter=countryCode:eq:US&sort=-date&style=flat`, '_blank');
     }
-
     function handleOpenCustomAll() {
       const f = document.getElementById('fromDate').value;
       const t = document.getElementById('toDate').value;
       if (!f || !t) return alert('Kies datums.');
       window.open(`https://rocket.maximizer.io/stats?dateStart=${f}&dateEnd=${t}&dimensions=campaignName,campaignID,campaignStatus&metrics=cpa,rpc,spend,revenue,profit,roi&filter=spend:gt:1&sort=-profit&style=flat`, '_blank');
     }
-
     function handleSearchCampaign() {
       const q = document.getElementById('campaignQuery').value.trim();
       if (q) openReport(q, 'yesterday');
     }
-
     function handleSearchById() {
       const q = document.getElementById('campaignIdQuery').value.trim();
       if (q) openReport(q, 'yesterday', true);
     }
-
     function toggleDarkMode() {
       const isDark = document.body.classList.toggle('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
       document.getElementById('themeToggleBtn').textContent = isDark ? '☀️ Lichte modus' : '🌙 Donkere modus';
     }
-    
     if(localStorage.getItem('theme') === 'dark') { 
         document.body.classList.add('dark'); 
         document.getElementById('themeToggleBtn').textContent = '☀️ Lichte modus'; 
